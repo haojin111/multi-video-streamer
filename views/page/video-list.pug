@@ -1,0 +1,64 @@
+extends ../layout/base 
+block content 
+	section.content-header 
+		h1 
+			| Dashboard
+		ol.breadcrumb 
+			li 
+				a(href='#') 
+					i.fa.fa-video-camera
+					| Video Lists 
+			
+	section.content
+		.row
+			.col-xs-12
+				.box
+					.box-header
+						h3.box-title Videos
+					// /.box-header
+					.box-body
+						form#uploadForm(action="/videos", method="post")
+							input(type="hidden", name="sourceType", value="0")
+							.row
+								.col-sm-6.col-md-2.offset-md-1.offset-sm-1.form-group
+									label.control-label(for="sourceType") Title
+									input.form-control(type="text", name="title")
+								.col-sm-6.col-md-2.offset-md-1.form-group
+									label.control-label(for="sourceType") Type
+									select#sourceType.form-control.col-sm-4
+										option(value="0") File
+										option(value="1") Extra Source								
+								.col-sm-12.col-md-4.input-group.form-group(style="float:unset;")
+									label.control-label(for="videoFile") Path
+									input#videoFile.form-control(name="path", type="text")
+									span.input-group-btn.upload-pan(style="position: absolute;right: 0px;")
+										button.btn.btn-info.btn-flag#uploadBtn(type="button") Upload
+								button.btn.pull-right.btn-default.btn-success#add(type="submit", style="margin-top: -45px;margin-right: 30px;") Add
+						input#fromFile(type="file", name="video_file", accept="video/mp4, video/mkv", style="display:none")
+						table#videoListTbl.table.table-bordered.table-striped
+							thead
+								tr
+									th #
+									th Title
+									th Source Type
+									th Path
+									th Action
+							tbody
+								each video, index in lists
+									tr(key=video.id)
+										td #{index + 1}
+										td #{video.title}
+										td
+											if video.type=='0'
+												i.fa.fa-file-video-o
+											else
+												i.fa.fa-cloud
+										td #{video.path}
+										td
+											.btn-group
+												button.btn.btn-default.btn-danger(type="button")
+													i.fa.fa-trash
+												button.btn.btn-default.btn-info(type="button")
+													i.fa.fa-arrow-up
+												button.btn.btn-default.btn-warning(type="button")
+													i.fa.fa-arrow-down

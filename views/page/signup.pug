@@ -1,0 +1,41 @@
+extends ../layout/base 
+block content 
+	section.content-header 
+		h1 
+			| Register Admin User
+		ol.breadcrumb 
+			li 
+				a(href='#') 
+					i.fa.fa-users
+					| User 
+			li.active register 
+	section.content
+		.box.box-info
+			.box-header.with-border
+				h3.box-title User Info
+      
+			form.form-horizontal#registerForm(action="/signup", method="post")
+				.box-body
+					.form-group
+						label.col-sm-2.control-label(for="inputFirstName") First Name
+						.col-sm-10.col-md-4
+							input#inputFirstName.form-control(type="text", name="firstName", placeholder="First Name")
+						label.col-sm-2.control-label(for="inputLastName") Last Name
+						.col-sm-10.col-md-4
+							input#inputLastName.form-control(type="text", name="lastName", placeholder="Last Name")
+					.form-group
+						label.col-sm-2.control-label(for="inputEmail") Email
+						.col-sm-10.col-md-4
+							input#inputEmail.form-control(type="email", name="email", placeholder="Email")
+					.form-group
+						label.col-sm-2.control-label(for="inputPassword") Password
+						.col-sm-10.col-md-4
+							input#inputPassword.form-control(type="password", name="password", placeholder="Password")
+					.form-group
+						label.col-sm-2.control-label(for="inputPassword1") Confirm Password
+						.col-sm-10.col-md-4
+							input#inputPassword1.form-control(type="password" placeholder="Password")
+					
+				.box-footer
+					button.btn.btn-info.pull-right(type="submit") Register
+				

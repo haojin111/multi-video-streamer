@@ -1,0 +1,22 @@
+extends ../layout/no-header 
+block content 
+	.login-box
+		.login-logo
+			a(href='../../index2.html')
+				b Admin
+				|  Board
+		// /.login-logo
+		.login-box-body
+			p.login-box-msg Sign in to start your session
+			form(action='/login', method='post', novalidate)
+				.error.help-block #{loginMessage}
+				.form-group.has-feedback
+					input.form-control(type='email', name="email", placeholder='Email', require)
+					span.glyphicon.glyphicon-envelope.form-control-feedback
+				.form-group.has-feedback
+					input.form-control(type='password', name="password", placeholder='Password', require)
+					span.glyphicon.glyphicon-lock.form-control-feedback
+				.row
+					.col-xs-4.offset-xs-8
+						button.btn.btn-primary.btn-block.btn-flat(type='submit') Sign In
+			a.text-center(href='/signup') Register a new membership	

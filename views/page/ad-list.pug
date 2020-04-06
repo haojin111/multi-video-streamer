@@ -1,0 +1,72 @@
+extends ../layout/base 
+block content 
+	section.content-header 
+		h1 
+			| Dashboard
+		ol.breadcrumb 
+			li 
+				a(href='#') 
+					i.fa.fa-video-camera
+					| Advertise Lists 
+			
+	section.content
+		.row
+			.col-xs-12
+				.box
+					.box-header
+						h3.box-title Ads
+					// /.box-header
+					.box-body
+						form#uploadForm(action="/advertise", method="post")
+							input(type="hidden", name="sourceType", value="0")
+							.row
+								.col-sm-6.col-md-2.offset-md-1.offset-sm-1.form-group
+									label.control-label(for="sourceType") Title
+									input.form-control(type="text", name="title")
+								.col-sm-6.col-md-2.offset-md-1.form-group
+									label.control-label(for="sourceType") Type
+									select#sourceType.form-control.col-sm-4
+										option(value="0") File
+										option(value="1") Extra Source								
+								.col-sm-8.col-md-4
+									.input-group.form-group(style="float:unset;")
+										label.control-label(for="videoFile") Path
+										input#videoFile.form-control(name="path", type="text")
+										span.input-group-btn.upload-pan(style="position: absolute;right: 0px;")
+											button.btn.btn-info.btn-flag#uploadBtn(type="button") Upload
+								.col-sm-4.col-md-2
+									label.control-label(for="time") Time
+									.input-group.form-group(style="float:unset;")
+										input.form-control#time(type="number", min="10", name="time")
+										span.input-group-addon min
+								button.btn.pull-right.btn-default.btn-success#add(type="submit", style="margin-right: 30px;") Add
+						input#fromFile(type="file", name="video_file", accept="video/mp4, video/mkv", style="display:none")
+						table#adListTbl.table.table-bordered.table-striped
+							thead
+								tr
+									th #
+									th Title
+									th Source Type
+									th Path
+									th Time (min)
+									th Action
+							tbody
+								each video, index in lists
+									tr(key=video.id)
+										td #{index + 1}
+										td #{video.title}
+										td
+											if video.type=='0'
+												i.fa.fa-file-video-o
+											else
+												i.fa.fa-cloud
+										td #{video.path}
+										td #{video.time}
+										td
+											.btn-group
+												button.btn.btn-default.btn-danger(type="button")
+													i.fa.fa-trash
+												button.btn.btn-default.btn-info(type="button")
+													i.fa.fa-arrow-up
+												button.btn.btn-default.btn-warning(type="button")
+													i.fa.fa-arrow-down
